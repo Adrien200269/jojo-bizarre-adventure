@@ -4,7 +4,7 @@ import { STANDS_AND_CHARACTERS } from '../data/jojoData.js';
 import StandRadarChart from './StandRadarChart.jsx';
 import soundEngine from '../utils/soundEngine.js';
 import confetti from 'canvas-confetti';
-import { Award, RotateCcw, Volume2, Sparkles, CheckCircle2 } from 'lucide-react';
+import { RotateCcw, Volume2, Sparkles, Brain } from 'lucide-react';
 
 export default function StandQuiz() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -21,7 +21,6 @@ export default function StandQuiz() {
     if (currentStep < QUIZ_QUESTIONS.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      // Calculate winner
       calculateResult(newAnswers);
     }
   };
@@ -47,7 +46,14 @@ export default function StandQuiz() {
     setResultStand(matched);
 
     setTimeout(() => {
-      soundEngine.playOraRush();
+      if (matched.id === 'star-platinum') soundEngine.playOraRush();
+      else if (matched.id === 'the-world') soundEngine.playMudaRush();
+      else if (matched.id === 'gold-experience') soundEngine.playGerMuda();
+      else if (matched.id === 'crazy-diamond') soundEngine.playDoraRush();
+      else if (matched.id === 'sticky-fingers') soundEngine.playAriArrivederci();
+      else if (matched.id === 'tusk-act-4') soundEngine.playTuskOra();
+      else soundEngine.playStandSummon();
+
       confetti({
         particleCount: 120,
         spread: 90,
@@ -63,18 +69,32 @@ export default function StandQuiz() {
     setResultStand(null);
   };
 
+  const handlePlayResultVoice = () => {
+    if (!resultStand) return;
+    if (resultStand.id === 'star-platinum') soundEngine.playYareYareDaze();
+    else if (resultStand.id === 'the-world') soundEngine.playDioApproach();
+    else if (resultStand.id === 'gold-experience') soundEngine.playGiornoDream();
+    else if (resultStand.id === 'sticky-fingers') soundEngine.playArrivederci();
+    else if (resultStand.id === 'killer-queen') soundEngine.playBitesTheDust();
+    else if (resultStand.id === 'king-crimson') soundEngine.playKingCrimsonResults();
+    else if (resultStand.id === 'crazy-diamond') soundEngine.playDoraRush();
+    else if (resultStand.id === 'tusk-act-4') soundEngine.playChumimiin();
+    else soundEngine.speak(resultStand.quote || resultStand.standCry, 1.1, 1.0);
+  };
+
   return (
     <div className="py-8 px-4 max-w-4xl mx-auto">
       {/* Header */}
       <div className="text-center mb-8 border-b-4 border-black pb-4">
-        <div className="inline-block bg-yellow-400 text-black font-manga px-4 py-0.5 text-xs border-2 border-black mb-1">
-          STAND COMPATIBILITY TEST
+        <div className="inline-flex items-center gap-1.5 bg-yellow-400 text-black font-manga px-4 py-0.5 text-xs border-2 border-black mb-1">
+          <Brain className="w-3.5 h-3.5" />
+          <span>PSYCHOLOGICAL PERSONALITY & TEMPERAMENT PROFILING</span>
         </div>
         <h2 className="text-3xl md:text-5xl font-manga text-white text-stroke-black tracking-wide">
           WHAT IS YOUR STAND?
         </h2>
         <p className="text-gray-300 text-sm mt-1 max-w-lg mx-auto">
-          Answer 6 psychological and tactical questions to discover which Stand manifests from your fighting spirit!
+          No hypothetical scenarios—explore your core traits, temperament, internal drives, and worldview to discover your Stand alignment!
         </p>
       </div>
 
@@ -170,19 +190,16 @@ export default function StandQuiz() {
           {/* Action Buttons */}
           <div className="flex flex-wrap items-center justify-center gap-3">
             <button
-              onClick={() => {
-                soundEngine.playStandSummon();
-                soundEngine.speak(resultStand.standCry || resultStand.quote, 1.1, 1.0);
-              }}
-              className="comic-btn bg-yellow-400 hover:bg-yellow-300 text-black px-5 py-2.5 text-sm font-bold flex items-center gap-2"
+              onClick={handlePlayResultVoice}
+              className="comic-btn bg-yellow-400 hover:bg-yellow-300 text-black px-5 py-2.5 text-sm font-bold flex items-center gap-2 shadow-[3px_3px_0px_#000]"
             >
               <Volume2 className="w-4 h-4" />
-              <span>HEAR STAND CRY</span>
+              <span>PLAY CHARACTER VOICE</span>
             </button>
 
             <button
               onClick={handleRetake}
-              className="comic-btn bg-purple-700 hover:bg-purple-600 text-white px-5 py-2.5 text-sm font-bold flex items-center gap-2"
+              className="comic-btn bg-purple-700 hover:bg-purple-600 text-white px-5 py-2.5 text-sm font-bold flex items-center gap-2 shadow-[3px_3px_0px_#000]"
             >
               <RotateCcw className="w-4 h-4" />
               <span>RETAKE TEST</span>

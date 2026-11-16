@@ -1,185 +1,285 @@
 import React, { useState } from 'react';
 import soundEngine from '../utils/soundEngine.js';
-import { Volume2, Play, Sparkles, Mic, Radio } from 'lucide-react';
+import { Volume2, Play, Sparkles, Mic, Radio, Award } from 'lucide-react';
 
-const SOUND_TRIGGERS = [
+const REAL_VOICE_TRIGGERS = [
   {
     id: 'za-warudo',
     title: 'ZA WARUDO! (Time Stop)',
     sub: '世界 - 時よ止まれ！',
+    actor: 'Takehito Koyasu (子安 武人)',
+    character: 'DIO (Part 3)',
     action: () => soundEngine.playZaWarudo(),
     color: 'bg-yellow-400 text-black',
-    tag: 'DIO / Star Platinum',
-    icon: '⏳'
-  },
-  {
-    id: 'time-resume',
-    title: 'Time Resumes',
-    sub: '時は動き出す...',
-    action: () => soundEngine.playTimeResume(),
-    color: 'bg-amber-500 text-black',
-    tag: 'DIO',
-    icon: '⏱️'
+    icon: '⏳',
+    isReal: true
   },
   {
     id: 'ora-rush',
     title: 'ORA ORA ORA ORA!',
-    sub: 'スタープラチナ 連打ラッシュ',
+    sub: 'オラオラ連打ラッシュ',
+    actor: 'Daisuke Ono (小野 大輔)',
+    character: 'Jotaro Kujo',
     action: () => soundEngine.playOraRush(),
     color: 'bg-purple-600 text-white',
-    tag: 'Jotaro Kujo',
-    icon: '👊'
+    icon: '👊',
+    isReal: true
   },
   {
     id: 'muda-rush',
     title: 'MUDA MUDA MUDA!',
-    sub: '無駄無駄無駄 7ページラッシュ',
+    sub: '無駄無駄ラッシュ',
+    actor: 'Takehito Koyasu',
+    character: 'DIO',
     action: () => soundEngine.playMudaRush(),
+    color: 'bg-amber-500 text-black',
+    icon: '⚡',
+    isReal: true
+  },
+  {
+    id: 'ger-muda',
+    title: '7-Page MUDA! (Requiem)',
+    sub: '無駄無駄無駄 7ページ',
+    actor: 'Kensho Ono (小野 賢章)',
+    character: 'Giorno Giovanna',
+    action: () => soundEngine.playGerMuda(),
     color: 'bg-yellow-500 text-black',
-    tag: 'DIO & Giorno',
-    icon: '⚡'
-  },
-  {
-    id: 'roundabout',
-    title: 'To Be Continued...',
-    sub: 'Roundabout Funky Bassline',
-    action: () => soundEngine.playRoundaboutBass(),
-    color: 'bg-emerald-600 text-white',
-    tag: 'Iconic Ending Theme',
-    icon: '➡️'
-  },
-  {
-    id: 'menacing',
-    title: 'Menacing Rumble (ゴゴゴゴ)',
-    sub: '不気味な気配 / 重低音',
-    action: () => soundEngine.playMenacingRumble(),
-    color: 'bg-violet-900 text-yellow-300',
-    tag: 'Araki SFX',
-    icon: '👁️'
-  },
-  {
-    id: 'stand-summon',
-    title: 'Stand Summon Aura',
-    sub: 'スタンド発動音',
-    action: () => soundEngine.playStandSummon(),
-    color: 'bg-cyan-600 text-white',
-    tag: 'Aura Ignition',
-    icon: '✨'
-  },
-  {
-    id: 'wryyy',
-    title: 'WRYYYYYYYYYY!',
-    sub: '吸血鬼の咆哮',
-    action: () => {
-      soundEngine.playPunchImpact(350);
-      soundEngine.speak("WRYYYYYYYYYY!", 1.3, 1.4);
-    },
-    color: 'bg-red-600 text-white',
-    tag: 'DIO',
-    icon: '🩸'
-  },
-  {
-    id: 'kono-dio',
-    title: 'Kono DIO da!',
-    sub: 'このDIOだッ！',
-    action: () => {
-      soundEngine.playPunchImpact(200);
-      soundEngine.speak("Kono DIO da!", 1.0, 0.9);
-    },
-    color: 'bg-rose-500 text-white',
-    tag: 'Part 1 Dio',
-    icon: '😈'
+    icon: '🌟',
+    isReal: true
   },
   {
     id: 'yare-yare',
     title: 'Yare Yare Daze',
     sub: 'やれやれだぜ...',
-    action: () => soundEngine.speak("Yare yare daze...", 0.85, 0.75),
+    actor: 'Daisuke Ono',
+    character: 'Jotaro Kujo',
+    action: () => soundEngine.playYareYareDaze(),
     color: 'bg-indigo-700 text-white',
-    tag: 'Jotaro Kujo',
-    icon: '🧢'
+    icon: '🧢',
+    isReal: true
   },
   {
-    id: 'daga-kotowaru',
-    title: 'Daga Kotowaru! (I refuse)',
-    sub: 'だが断る！',
-    action: () => soundEngine.speak("Daga kotowaru!", 1.1, 1.1),
-    color: 'bg-pink-600 text-white',
-    tag: 'Rohan Kishibe',
-    icon: '🖋️'
+    id: 'sp-the-world',
+    title: 'Star Platinum: The World!',
+    sub: 'スタープラチナ ザ・ワールド',
+    actor: 'Daisuke Ono',
+    character: 'Jotaro Kujo',
+    action: () => soundEngine.playStarPlatinumTheWorld(),
+    color: 'bg-purple-800 text-yellow-300',
+    icon: '⭐',
+    isReal: true
+  },
+  {
+    id: 'road-roller',
+    title: 'ROAD ROLLER DA!',
+    sub: 'ロードローラーだッ！',
+    actor: 'Takehito Koyasu',
+    character: 'DIO',
+    action: () => soundEngine.playRoadRollerDa(),
+    color: 'bg-yellow-600 text-black',
+    icon: '🚜',
+    isReal: true
+  },
+  {
+    id: 'dio-wryyy',
+    title: 'WRYYYYYYYYYY!',
+    sub: '最高に「ハイ！」ってやつだ！',
+    actor: 'Takehito Koyasu',
+    character: 'DIO',
+    action: () => soundEngine.playDioWryyy(),
+    color: 'bg-red-600 text-white',
+    icon: '🩸',
+    isReal: true
+  },
+  {
+    id: 'dio-approach',
+    title: 'Approaching Me? (Ho...)',
+    sub: 'ほう… 向かって来るのか',
+    actor: 'Takehito Koyasu',
+    character: 'DIO',
+    action: () => soundEngine.playDioApproach(),
+    color: 'bg-rose-600 text-white',
+    icon: '🚶',
+    isReal: true
   },
   {
     id: 'nigerundayo',
     title: 'Nigerundayo, Smokey!',
-    sub: '逃げるんだよォ！',
-    action: () => soundEngine.speak("Nigerundayo, Smokey!", 1.25, 1.2),
+    sub: '逃げるんだよォ！スモーキー！',
+    actor: 'Tomokazu Sugita (杉田 智和)',
+    character: 'Joseph Joestar',
+    action: () => soundEngine.playNigerundayo(),
     color: 'bg-amber-600 text-white',
-    tag: 'Joseph Joestar',
-    icon: '🏃'
+    icon: '🏃',
+    isReal: true
+  },
+  {
+    id: 'joseph-nice',
+    title: 'NAAAICE!',
+    sub: 'ナイス！',
+    actor: 'Unshō Ishizuka (石塚 運昇)',
+    character: 'Joseph Joestar',
+    action: () => soundEngine.playJosephNice(),
+    color: 'bg-emerald-600 text-white',
+    icon: '👍',
+    isReal: true
+  },
+  {
+    id: 'giorno-dream',
+    title: 'I Have a Dream!',
+    sub: 'ジョルノ・ジョバァーナには夢がある',
+    actor: 'Kensho Ono',
+    character: 'Giorno Giovanna',
+    action: () => soundEngine.playGiornoDream(),
+    color: 'bg-amber-400 text-black',
+    icon: '🐞',
+    isReal: true
+  },
+  {
+    id: 'this-is-requiem',
+    title: 'Kore ga Requiem da',
+    sub: 'これが… レクイエムだ',
+    actor: 'Kensho Ono',
+    character: 'Giorno Giovanna',
+    action: () => soundEngine.playThisIsRequiem(),
+    color: 'bg-yellow-300 text-black',
+    icon: '✨',
+    isReal: true
   },
   {
     id: 'ari-arrivederci',
     title: 'Ari Ari... Arrivederci!',
     sub: 'アリアリアリ... アリーヴェデルチ！',
-    action: () => {
-      soundEngine.playPunchImpact(240);
-      soundEngine.speak("ARI ARI ARI ARI ARI... ARRIVEDERCI!", 1.2, 1.05);
-    },
+    actor: 'Yuichi Nakamura (中村 悠一)',
+    character: 'Bruno Bucciarati',
+    action: () => soundEngine.playAriArrivederci(),
     color: 'bg-sky-600 text-white',
-    tag: 'Bruno Bucciarati',
-    icon: '🤐'
+    icon: '🤐',
+    isReal: true
   },
   {
     id: 'dora-rush',
     title: 'DORA RA RA RA!',
-    sub: 'クレイジー・ダイヤモンド 修復連打',
-    action: () => {
-      soundEngine.playPunchImpact(220);
-      soundEngine.speak("DORA RA RA RA RA RA! DORAAA!", 1.3, 1.1);
-    },
-    color: 'bg-fuchsia-600 text-white',
-    tag: 'Josuke Higashikata',
-    icon: '💎'
+    sub: 'ドラララ連打ラッシュ',
+    actor: 'Yuuki Ono (小野 友樹)',
+    character: 'Josuke Higashikata',
+    action: () => soundEngine.playDoraRush(),
+    color: 'bg-pink-600 text-white',
+    icon: '💎',
+    isReal: true
   },
   {
-    id: 'dojyaan',
-    title: 'DOJYAA~~N!',
-    sub: 'ドジャァ〜〜ン！',
-    action: () => soundEngine.speak("DOJYAA~~N!", 1.15, 1.25),
-    color: 'bg-blue-500 text-white',
-    tag: 'Funny Valentine (D4C)',
-    icon: '🇺🇸'
+    id: 'bites-the-dust',
+    title: 'Bites the Dust (Click!)',
+    sub: '負け犬を踏み潰す！',
+    actor: 'Toshiyuki Morikawa (森川 智之)',
+    character: 'Yoshikage Kira',
+    action: () => soundEngine.playBitesTheDust(),
+    color: 'bg-fuchsia-700 text-white',
+    icon: '💣',
+    isReal: true
+  },
+  {
+    id: 'king-crimson',
+    title: 'Results Remain (Kekka Dake Da)',
+    sub: '結果だけだ！',
+    actor: 'Katsuyuki Konishi (小西 克幸)',
+    character: 'Diavolo',
+    action: () => soundEngine.playKingCrimsonResults(),
+    color: 'bg-red-800 text-white',
+    icon: '👁️',
+    isReal: true
+  },
+  {
+    id: 'stone-free',
+    title: 'Stone Free ORA!',
+    sub: 'ストーン・フリー 連打',
+    actor: 'Fairouz Ai (ファイルーズ あい)',
+    character: 'Jolyne Cujoh',
+    action: () => soundEngine.playStoneFreeOra(),
+    color: 'bg-cyan-600 text-black',
+    icon: '🦋',
+    isReal: true
+  },
+  {
+    id: 'tusk-ora',
+    title: 'Tusk ACT 4 ORA!',
+    sub: 'オラオラ (黄金の回転)',
+    actor: 'Yuki Kaji (梶 裕貴)',
+    character: 'Johnny Joestar',
+    action: () => soundEngine.playTuskOra(),
+    color: 'bg-rose-500 text-white',
+    icon: '🐎',
+    isReal: true
+  },
+  {
+    id: 'chumimiin',
+    title: 'CHUMIMI~~N!',
+    sub: 'チュミミ〜〜ン！',
+    actor: 'Tusk Act 4',
+    character: 'Tusk ACT 4',
+    action: () => soundEngine.playChumimiin(),
+    color: 'bg-pink-400 text-black',
+    icon: '🌀',
+    isReal: true
+  },
+  {
+    id: 'volare-via',
+    title: 'Volare Via!',
+    sub: 'ボラーレ・ヴィーア (飛んで行きな！)',
+    actor: 'Daiki Yamashita (山下 大輝)',
+    character: 'Narancia Ghirga',
+    action: () => soundEngine.playVolareVia(),
+    color: 'bg-orange-500 text-white',
+    icon: '✈️',
+    isReal: true
+  },
+  {
+    id: 'roundabout',
+    title: 'To Be Continued...',
+    sub: 'Roundabout Funky Bassline',
+    actor: 'Yes (Ending Theme)',
+    character: 'Iconic Endcard',
+    action: () => soundEngine.playRoundaboutBass(),
+    color: 'bg-emerald-600 text-white',
+    icon: '➡️',
+    isReal: false
   }
 ];
 
 export default function Soundboard() {
   const [activeSoundId, setActiveSoundId] = useState(null);
-  const [customPhrase, setCustomPhrase] = useState("Kono Giorno Giovanna ni wa yume ga aru!");
+  const [filterType, setFilterType] = useState('ALL');
+
+  const filteredVoices = REAL_VOICE_TRIGGERS.filter((item) => {
+    if (filterType === 'Jotaro') return item.character.includes('Jotaro');
+    if (filterType === 'DIO') return item.character.includes('DIO');
+    if (filterType === 'Giorno') return item.character.includes('Giorno');
+    if (filterType === 'Joestar') return ['Jotaro', 'Joseph', 'Josuke', 'Giorno', 'Jolyne', 'Johnny'].some(j => item.character.includes(j));
+    if (filterType === 'Villain') return ['DIO', 'Kira', 'Diavolo'].some(v => item.character.includes(v));
+    return true;
+  });
 
   const handleTrigger = (item) => {
     setActiveSoundId(item.id);
     item.action();
-    setTimeout(() => setActiveSoundId(null), 1500);
-  };
-
-  const handleCustomSpeech = () => {
-    soundEngine.playStandSummon();
-    soundEngine.speak(customPhrase, 1.0, 1.0);
+    setTimeout(() => setActiveSoundId(null), 1800);
   };
 
   return (
     <div className="py-8 px-4 max-w-7xl mx-auto">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 border-b-4 border-black pb-4">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 border-b-4 border-black pb-4">
         <div>
-          <div className="inline-block bg-yellow-400 text-black font-manga px-3 py-0.5 text-xs border-2 border-black mb-1">
-            WEB AUDIO FX & SPEECH ENGINE
+          <div className="inline-flex items-center gap-1.5 bg-yellow-400 text-black font-manga px-3 py-0.5 text-xs border-2 border-black mb-1">
+            <Award className="w-3.5 h-3.5" />
+            <span>ORIGINAL JAPANESE ANIME VOICE CLIPS (OFFICIAL SEIYU)</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-manga text-white text-stroke-black tracking-wide">
-            JOJO RETRO SOUNDBOARD
+            REAL CHARACTER VOICE ARCHIVE
           </h2>
           <p className="text-gray-300 text-sm mt-1">
-            Pure synthesizer & voice engine. Triggers iconic anime SFX without waiting for large mp3 downloads!
+            Featuring authentic anime voice lines from Daisuke Ono, Takehito Koyasu, Kensho Ono, Fairouz Ai, Tomokazu Sugita, and more!
           </p>
         </div>
 
@@ -187,33 +287,58 @@ export default function Soundboard() {
         <div className="flex items-center gap-3 bg-[#150a2b] border-2 border-black px-4 py-2">
           <Radio className="w-5 h-5 text-green-400 animate-pulse" />
           <div>
-            <div className="text-[10px] text-gray-400 uppercase font-bold">Sound Synthesizer</div>
-            <div className="font-manga text-yellow-400 text-sm">ONLINE • WEB AUDIO API</div>
+            <div className="text-[10px] text-gray-400 uppercase font-bold">Audio Engine</div>
+            <div className="font-manga text-yellow-400 text-sm">REAL ANIME VOICES • LOADED</div>
           </div>
         </div>
       </div>
 
+      {/* Filter Tabs */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-6">
+        <span className="text-xs font-manga text-yellow-400 shrink-0">FILTER VOICES:</span>
+        {[
+          { id: 'ALL', label: 'All Voices (22)' },
+          { id: 'Joestar', label: 'Joestars Only' },
+          { id: 'Villain', label: 'Villains & Bosses' },
+          { id: 'Jotaro', label: 'Jotaro Kujo' },
+          { id: 'DIO', label: 'DIO' },
+          { id: 'Giorno', label: 'Giorno Giovanna' },
+        ].map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setFilterType(tab.id)}
+            className={`comic-btn px-3 py-1 text-xs whitespace-nowrap ${
+              filterType === tab.id
+                ? 'bg-[#ff0077] text-white shadow-[2px_2px_0px_#000]'
+                : 'bg-[#150d2c] text-gray-300 hover:text-white'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
       {/* Soundboard Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-10">
-        {SOUND_TRIGGERS.map((item) => {
+        {filteredVoices.map((item) => {
           const isPlaying = activeSoundId === item.id;
           return (
             <button
               key={item.id}
               onClick={() => handleTrigger(item)}
-              className={`comic-box p-4 text-left transition-all relative overflow-hidden flex flex-col justify-between min-h-[125px] ${
+              className={`comic-box p-4 text-left transition-all relative overflow-hidden flex flex-col justify-between min-h-[145px] ${
                 item.color
               } ${isPlaying ? 'scale-95 ring-4 ring-yellow-300 shadow-none' : ''}`}
             >
-              {/* Top Tag & Emoji */}
+              {/* Top Tag & Real Voice Badge */}
               <div className="flex items-center justify-between mb-2">
-                <span className="font-mono text-[10px] font-bold uppercase tracking-wider bg-black/40 text-white px-2 py-0.5 border border-black/30">
-                  {item.tag}
+                <span className="font-mono text-[9px] font-bold uppercase tracking-wider bg-black/60 text-yellow-300 px-2 py-0.5 border border-black/40">
+                  {item.character}
                 </span>
                 <span className="text-2xl">{item.icon}</span>
               </div>
 
-              {/* Title & Kanji Sub */}
+              {/* Title & Kanji */}
               <div>
                 <h4 className="font-manga text-xl md:text-2xl tracking-wide leading-tight drop-shadow-[1px_1px_0px_#000]">
                   {item.title}
@@ -223,67 +348,18 @@ export default function Soundboard() {
                 </div>
               </div>
 
-              {/* Play Indicator */}
-              <div className="flex items-center justify-between text-[10px] font-mono font-bold mt-2 pt-2 border-t border-black/20">
-                <span>{isPlaying ? 'PLAYING...' : 'CLICK TO FIRE'}</span>
-                <Play className={`w-3 h-3 ${isPlaying ? 'animate-ping' : ''}`} />
+              {/* Voice Actor Credit */}
+              <div className="mt-2 pt-2 border-t border-black/20 flex items-center justify-between text-[10px]">
+                <span className="font-medium opacity-90 truncate">
+                  🎙️ {item.actor}
+                </span>
+                <span className="font-manga font-bold text-yellow-300 uppercase shrink-0">
+                  {isPlaying ? 'PLAYING...' : 'PLAY ▶'}
+                </span>
               </div>
             </button>
           );
         })}
-      </div>
-
-      {/* Custom JoJo Voice Synthesizer Input */}
-      <div className="comic-box bg-[#1b0d36] border-4 border-black p-6">
-        <div className="flex items-center gap-2 mb-3">
-          <Mic className="w-5 h-5 text-yellow-400" />
-          <h3 className="font-manga text-2xl text-yellow-400 tracking-wide">
-            CUSTOM JOJO VOICE LINE GENERATOR
-          </h3>
-        </div>
-        <p className="text-xs text-gray-300 mb-4">
-          Type any custom phrase or battle quote in Japanese, English, or Italian to hear it synthesized!
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-3">
-          <input
-            type="text"
-            value={customPhrase}
-            onChange={(e) => setCustomPhrase(e.target.value)}
-            placeholder="Type your iconic quote..."
-            className="flex-1 bg-[#0b0517] border-2 border-black text-white px-4 py-2.5 text-sm focus:outline-none focus:border-yellow-400 font-semibold"
-          />
-          <button
-            onClick={handleCustomSpeech}
-            className="comic-btn bg-[#ff0077] hover:bg-[#ff1a8c] text-white px-6 py-2.5 text-sm flex items-center justify-center gap-2 font-bold shadow-[3px_3px_0px_#000] shrink-0"
-          >
-            <Volume2 className="w-4 h-4 text-yellow-300" />
-            <span>SPEAK PHRASE</span>
-          </button>
-        </div>
-
-        {/* Quick Suggestion Chips */}
-        <div className="flex flex-wrap items-center gap-2 mt-4 pt-3 border-t border-purple-900/60">
-          <span className="text-[11px] font-manga text-yellow-400">QUICK PRESETS:</span>
-          {[
-            "Kono Giorno Giovanna ni wa yume ga aru!",
-            "Star Platinum: The World!",
-            "Killer Queen has already touched that doorknob.",
-            "I reject my humanity, JoJo!",
-            "Rerorero rerorero rerorero"
-          ].map((phrase, i) => (
-            <button
-              key={i}
-              onClick={() => {
-                setCustomPhrase(phrase);
-                soundEngine.speak(phrase, 1.0, 1.0);
-              }}
-              className="text-[10px] bg-[#0b0517] hover:bg-[#201040] text-purple-300 border border-purple-800/80 px-2 py-1 font-semibold transition-colors"
-            >
-              "{phrase}"
-            </button>
-          ))}
-        </div>
       </div>
     </div>
   );

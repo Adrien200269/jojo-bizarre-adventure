@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { STANDS_AND_CHARACTERS } from '../data/jojoData.js';
 import soundEngine from '../utils/soundEngine.js';
 import confetti from 'canvas-confetti';
-import { Swords, Play, RotateCcw, MapPin, Zap } from 'lucide-react';
+import { Swords, RotateCcw, MapPin, Zap } from 'lucide-react';
 
 const VENUES = [
   { id: 'cairo', name: 'Cairo Clock Tower (1989)', sub: 'Midnight Time Stop Arena', color: 'from-amber-600 to-purple-900' },
@@ -13,7 +13,6 @@ const VENUES = [
 ];
 
 export default function BattleSimulator({ customStand }) {
-  // Combine canon stands with custom stand if present
   const availableFighters = customStand
     ? [customStand, ...STANDS_AND_CHARACTERS]
     : STANDS_AND_CHARACTERS;
@@ -34,6 +33,41 @@ export default function BattleSimulator({ customStand }) {
   const f1 = availableFighters.find((f) => f.id === fighter1Id) || availableFighters[0];
   const f2 = availableFighters.find((f) => f.id === fighter2Id) || availableFighters[1];
 
+  // Helper to play real voice based on Stand ID
+  const playFighterVoice = (fighter, type = 'rush') => {
+    const id = fighter.id;
+    if (type === 'approach') {
+      if (id === 'star-platinum') soundEngine.playYareYareDaze();
+      else if (id === 'the-world') soundEngine.playDioApproach();
+      else if (id === 'gold-experience') soundEngine.playGiornoDream();
+      else if (id === 'sticky-fingers') soundEngine.playArrivederci();
+      else soundEngine.playStandSummon();
+      return;
+    }
+
+    if (type === 'rush') {
+      if (id === 'star-platinum') soundEngine.playOraRush();
+      else if (id === 'the-world') soundEngine.playMudaRush();
+      else if (id === 'gold-experience') soundEngine.playGerMuda();
+      else if (id === 'crazy-diamond') soundEngine.playDoraRush();
+      else if (id === 'sticky-fingers') soundEngine.playAriArrivederci();
+      else if (id === 'stone-free') soundEngine.playStoneFreeOra();
+      else if (id === 'tusk-act-4') soundEngine.playTuskOra();
+      else soundEngine.playPunchImpact(260);
+      return;
+    }
+
+    if (type === 'finisher') {
+      if (id === 'the-world') soundEngine.playRoadRollerDa();
+      else if (id === 'star-platinum') soundEngine.playStarPlatinumTheWorld();
+      else if (id === 'killer-queen') soundEngine.playBitesTheDust();
+      else if (id === 'gold-experience') soundEngine.playThisIsRequiem();
+      else if (id === 'king-crimson') soundEngine.playKingCrimsonResults();
+      else if (id === 'tusk-act-4') soundEngine.playChumimiin();
+      else soundEngine.playPunchImpact(320);
+    }
+  };
+
   const handleStartClash = () => {
     if (isBattling) return;
 
@@ -46,9 +80,9 @@ export default function BattleSimulator({ customStand }) {
 
     const logs = [];
 
-    // Round 1: Approach & Taunts
+    // Round 1: Approach & Taunts (Authentic Voice)
     setTimeout(() => {
-      soundEngine.speak(f1.quote || f1.standCry, 1.1, 1.0);
+      playFighterVoice(f1, 'approach');
       logs.push({
         round: 1,
         title: "APPROACH & INTENT",
@@ -58,9 +92,9 @@ export default function BattleSimulator({ customStand }) {
       setBattleLogs([...logs]);
     }, 600);
 
-    // Round 2: Clash of Destructive Power
+    // Round 2: Real Stand Rush Barrage Audio
     setTimeout(() => {
-      soundEngine.playOraRush();
+      playFighterVoice(f1, 'rush');
       const pwr1 = f1.statValues?.power || 80;
       const pwr2 = f2.statValues?.power || 80;
       const damageTo2 = Math.min(45, Math.floor(pwr1 * 0.4));
@@ -71,28 +105,27 @@ export default function BattleSimulator({ customStand }) {
 
       logs.push({
         round: 2,
-        title: "STAND RUSH BARRAGE",
-        text: `Furious fist barrage! [${f1.name}] unleashes 『${f1.standCry}』 clashing against [${f2.name}]'s defense!`,
+        title: "AUTHENTIC STAND RUSH BARRAGE",
+        text: `Furious fist barrage! [${f1.name}] unleashes 『${f1.standCry}』 clashing against [${f2.name}]!`,
         sfx: "ドドドド"
       });
       setBattleLogs([...logs]);
-    }, 2200);
+    }, 2400);
 
     // Round 3: Special Ability Trigger
     setTimeout(() => {
-      soundEngine.playPunchImpact(300);
+      playFighterVoice(f1, 'finisher');
       logs.push({
         round: 3,
         title: "SIGNATURE TECHNIQUE ACTIVATION",
-        text: `At ${selectedVenue.name}, [${f1.name}] activates [${f1.signatureMove}] while [${f2.name}] counters with [${f2.signatureMove}]! Shockwaves tear through the terrain!`,
+        text: `At ${selectedVenue.name}, [${f1.name}] activates [${f1.signatureMove}] while [${f2.name}] counters with [${f2.signatureMove}]!`,
         sfx: "バァァァン！"
       });
       setBattleLogs([...logs]);
-    }, 4200);
+    }, 4500);
 
     // Round 4: Decisive Climax & Victory
     setTimeout(() => {
-      // Calculate winner based on composite stats + slight RNG
       const score1 = (f1.statValues?.power || 80) + (f1.statValues?.speed || 80) + Math.random() * 25;
       const score2 = (f2.statValues?.power || 80) + (f2.statValues?.speed || 80) + Math.random() * 25;
 
@@ -122,7 +155,7 @@ export default function BattleSimulator({ customStand }) {
         spread: 80,
         origin: { y: 0.6 }
       });
-    }, 6200);
+    }, 6600);
   };
 
   const handleReset = () => {
@@ -139,13 +172,13 @@ export default function BattleSimulator({ customStand }) {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 border-b-4 border-black pb-4">
         <div>
           <div className="inline-block bg-yellow-400 text-black font-manga px-3 py-0.5 text-xs border-2 border-black mb-1">
-            SIMULATED STAND COMBAT
+            SIMULATED STAND COMBAT WITH REAL ANIME AUDIO
           </div>
           <h2 className="text-3xl md:text-5xl font-manga text-white text-stroke-black tracking-wide">
             STAND BATTLE ARENA
           </h2>
           <p className="text-gray-300 text-sm mt-1">
-            Match up any two Stands (including your custom creations), pick a venue, and witness an anime-style tactical clash!
+            Experience real anime voice lines and Stand rushes as two Stand Masters clash!
           </p>
         </div>
 
@@ -172,7 +205,6 @@ export default function BattleSimulator({ customStand }) {
               <span className="font-mono text-xs text-yellow-300 font-bold">HP: {hp1}%</span>
             </div>
 
-            {/* Health Bar */}
             <div className="w-full bg-black/80 h-3 border border-black mb-4 overflow-hidden">
               <div
                 className="bg-gradient-to-r from-red-500 to-yellow-400 h-full transition-all duration-500"
@@ -180,7 +212,6 @@ export default function BattleSimulator({ customStand }) {
               />
             </div>
 
-            {/* Select dropdown */}
             <select
               value={fighter1Id}
               disabled={isBattling}
@@ -209,13 +240,12 @@ export default function BattleSimulator({ customStand }) {
           </div>
         </div>
 
-        {/* VS Center Pillar & Venue */}
+        {/* VS Center Pillar */}
         <div className="lg:col-span-2 flex flex-col items-center justify-center py-4 space-y-3">
           <div className="font-manga text-6xl text-yellow-400 text-stroke-thick drop-shadow-[4px_4px_0px_#ff0077] animate-pulse">
             VS
           </div>
 
-          {/* Venue selector */}
           <div className="w-full text-center">
             <span className="text-[10px] font-manga text-yellow-300 block mb-1">
               <MapPin className="w-3 h-3 inline mr-1" />
@@ -262,7 +292,6 @@ export default function BattleSimulator({ customStand }) {
               <span className="font-mono text-xs text-cyan-300 font-bold">HP: {hp2}%</span>
             </div>
 
-            {/* Health Bar */}
             <div className="w-full bg-black/80 h-3 border border-black mb-4 overflow-hidden">
               <div
                 className="bg-gradient-to-r from-cyan-400 to-blue-600 h-full transition-all duration-500"
@@ -270,7 +299,6 @@ export default function BattleSimulator({ customStand }) {
               />
             </div>
 
-            {/* Select dropdown */}
             <select
               value={fighter2Id}
               disabled={isBattling}
@@ -300,7 +328,7 @@ export default function BattleSimulator({ customStand }) {
         </div>
       </div>
 
-      {/* Battle Combat Log / Feed */}
+      {/* Battle Feed */}
       <div className="comic-box bg-[#0d071b] border-4 border-black p-6">
         <div className="flex items-center justify-between border-b-2 border-purple-900/80 pb-3 mb-4">
           <div className="flex items-center gap-2">
@@ -310,13 +338,13 @@ export default function BattleSimulator({ customStand }) {
             </h3>
           </div>
           <span className="text-xs font-mono text-gray-400">
-            {isBattling ? 'SIMULATION IN PROGRESS...' : winner ? 'MATCH CONCLUDED' : 'STANDBY'}
+            {isBattling ? 'VOICE CLIPS & RUSHES PLAYING...' : winner ? 'MATCH CONCLUDED' : 'STANDBY'}
           </span>
         </div>
 
         {battleLogs.length === 0 ? (
           <div className="py-12 text-center text-gray-400 text-sm">
-            Select two combatants and press <strong className="text-yellow-400">"INITIATE CLASH!"</strong> to begin the battle simulation.
+            Select two combatants and press <strong className="text-yellow-400">"INITIATE CLASH!"</strong> to hear real anime battle voice lines!
           </div>
         ) : (
           <div className="space-y-4">
@@ -344,7 +372,6 @@ export default function BattleSimulator({ customStand }) {
               </div>
             ))}
 
-            {/* Victor Card */}
             {winner && (
               <div className="bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-600 text-black border-4 border-black p-6 shadow-[6px_6px_0px_#ff0077] text-center space-y-2 mt-6">
                 <div className="font-manga text-sm font-bold tracking-widest uppercase">
@@ -356,9 +383,6 @@ export default function BattleSimulator({ customStand }) {
                 <div className="text-sm font-bold">
                   Stand Master: {winner.user}
                 </div>
-                <p className="text-xs font-semibold italic pt-2">
-                  "{winner.quote || winner.standCry}"
-                </p>
               </div>
             )}
           </div>

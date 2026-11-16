@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { STANDS_AND_CHARACTERS, JOJO_PARTS } from '../data/jojoData.js';
 import StandRadarChart from './StandRadarChart.jsx';
 import soundEngine from '../utils/soundEngine.js';
-import { Search, Filter, Volume2, Shield, Sparkles, X, Music, UserCheck } from 'lucide-react';
+import { Search, Volume2, Music, UserCheck, X, Sparkles } from 'lucide-react';
 
 export default function StandDatabase({ selectedPart, setSelectedPart }) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedType, setSelectedType] = useState('ALL');
   const [selectedAlignment, setSelectedAlignment] = useState('ALL');
   const [activeStandModal, setActiveStandModal] = useState(null);
 
@@ -24,18 +23,44 @@ export default function StandDatabase({ selectedPart, setSelectedPart }) {
     return matchesSearch && matchesPart && matchesAlignment;
   });
 
-  const handlePlayCry = (stand, e) => {
+  const handlePlayRealVoice = (stand, e) => {
     if (e) e.stopPropagation();
-    soundEngine.playStandSummon();
-    if (stand.id === 'star-platinum') {
-      soundEngine.playOraRush();
-    } else if (stand.id === 'the-world') {
-      soundEngine.playMudaRush();
-    } else if (stand.id === 'killer-queen') {
-      soundEngine.playPunchImpact(300);
-      soundEngine.speak("Kira Yoshikage. Click!", 1.1, 0.9);
-    } else {
-      soundEngine.speak(stand.standCry || stand.quote, 1.1, 1.0);
+
+    switch (stand.id) {
+      case 'star-platinum':
+        soundEngine.playOraRush();
+        break;
+      case 'the-world':
+        soundEngine.playMudaRush();
+        break;
+      case 'crazy-diamond':
+        soundEngine.playDoraRush();
+        break;
+      case 'killer-queen':
+        soundEngine.playBitesTheDust();
+        break;
+      case 'gold-experience':
+        soundEngine.playGerMuda();
+        break;
+      case 'sticky-fingers':
+        soundEngine.playAriArrivederci();
+        break;
+      case 'king-crimson':
+        soundEngine.playKingCrimsonResults();
+        break;
+      case 'stone-free':
+        soundEngine.playStoneFreeOra();
+        break;
+      case 'tusk-act-4':
+        soundEngine.playTuskOra();
+        break;
+      case 'd4c':
+        soundEngine.playRealVoice('volare_via.wav');
+        break;
+      default:
+        soundEngine.playStandSummon();
+        soundEngine.speak(stand.standCry || stand.quote, 1.1, 1.0);
+        break;
     }
   };
 
@@ -45,13 +70,13 @@ export default function StandDatabase({ selectedPart, setSelectedPart }) {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 border-b-4 border-black pb-4">
         <div>
           <div className="inline-block bg-yellow-400 text-black font-manga px-3 py-0.5 text-xs border-2 border-black mb-1">
-            STAND ARCHIVE & STAT ENCYCLOPEDIA
+            STAND ARCHIVE & REAL VOICE SAMPLES
           </div>
           <h2 className="text-3xl md:text-5xl font-manga text-white text-stroke-black tracking-wide">
             STAND DATABASE & RADAR CHARTS
           </h2>
           <p className="text-gray-300 text-sm mt-1">
-            Browse official canon Stands, analyze the 6-axis stat wheels, and explore musical inspirations across all 9 parts.
+            Browse official canon Stands, analyze the 6-axis stat wheels, and hear authentic anime battle cries!
           </p>
         </div>
 
@@ -162,7 +187,6 @@ export default function StandDatabase({ selectedPart, setSelectedPart }) {
               onClick={() => setActiveStandModal(stand)}
               className="comic-box bg-[#140b2b] hover:bg-[#1b0f38] border-4 border-black p-5 cursor-pointer relative flex flex-col justify-between group transition-all"
             >
-              {/* Top Bar / Part Badge & Alignment */}
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <span className="font-manga text-xs bg-black text-yellow-300 px-2 py-0.5 border border-yellow-400/50">
@@ -181,7 +205,6 @@ export default function StandDatabase({ selectedPart, setSelectedPart }) {
                   </span>
                 </div>
 
-                {/* Stand & User Titles */}
                 <h3 className="font-manga text-2xl text-white group-hover:text-yellow-400 transition-colors tracking-wide leading-tight">
                   {stand.name}
                 </h3>
@@ -193,7 +216,7 @@ export default function StandDatabase({ selectedPart, setSelectedPart }) {
                   <span>User: {stand.user}</span>
                 </div>
 
-                {/* Mini Radar Chart */}
+                {/* Radar Chart */}
                 <div className="bg-[#0b0517] p-2 border-2 border-black my-3 flex items-center justify-center">
                   <StandRadarChart
                     stats={stand.statValues}
@@ -231,7 +254,6 @@ export default function StandDatabase({ selectedPart, setSelectedPart }) {
                   </div>
                 </div>
 
-                {/* Music Reference */}
                 <div className="text-[11px] text-gray-400 flex items-center gap-1 truncate mb-3">
                   <Music className="w-3 h-3 text-pink-400 shrink-0" />
                   <span className="truncate">Ref: {stand.musicalReference}</span>
@@ -241,12 +263,12 @@ export default function StandDatabase({ selectedPart, setSelectedPart }) {
               {/* Bottom Action Bar */}
               <div className="pt-3 border-t-2 border-black flex items-center justify-between gap-2">
                 <button
-                  onClick={(e) => handlePlayCry(stand, e)}
+                  onClick={(e) => handlePlayRealVoice(stand, e)}
                   className="comic-btn bg-yellow-400 hover:bg-yellow-300 text-black px-2.5 py-1 text-xs flex items-center gap-1 font-bold"
-                  title="Play Stand cry"
+                  title="Play authentic character voice clip"
                 >
                   <Volume2 className="w-3.5 h-3.5" />
-                  <span>STAND CRY</span>
+                  <span>REAL VOICE</span>
                 </button>
 
                 <span className="text-xs font-manga text-purple-300 group-hover:text-white flex items-center gap-1">
@@ -262,7 +284,6 @@ export default function StandDatabase({ selectedPart, setSelectedPart }) {
       {activeStandModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm">
           <div className="comic-box bg-[#150a2c] border-4 border-black max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 relative shadow-[10px_10px_0px_#ff0077]">
-            {/* Close Button */}
             <button
               onClick={() => setActiveStandModal(null)}
               className="absolute right-4 top-4 bg-red-600 hover:bg-red-500 text-white p-1.5 border-2 border-black shadow-[2px_2px_0px_#000]"
@@ -270,13 +291,12 @@ export default function StandDatabase({ selectedPart, setSelectedPart }) {
               <X className="w-5 h-5" />
             </button>
 
-            {/* Modal Header */}
             <div className="border-b-4 border-black pb-4 mb-6">
               <div className="flex items-center gap-2 mb-1">
-                <span className="font-manga text-xs bg-yellow-400 text-black px-2 py-0.5 border border-black">
+                <span className="font-manga text-xs bg-yellow-400 text-black px-2 py-0.5 border border-black font-bold">
                   PART {activeStandModal.part}
                 </span>
-                <span className="font-manga text-xs bg-purple-700 text-white px-2 py-0.5 border border-black">
+                <span className="font-manga text-xs bg-purple-700 text-white px-2 py-0.5 border border-black font-bold">
                   {activeStandModal.type}
                 </span>
               </div>
@@ -291,9 +311,7 @@ export default function StandDatabase({ selectedPart, setSelectedPart }) {
               </div>
             </div>
 
-            {/* Modal Grid: Radar Chart & Details */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-              {/* Radar Chart */}
               <div className="bg-[#0b0518] p-4 border-4 border-black flex flex-col items-center">
                 <div className="font-manga text-xs text-yellow-300 tracking-wider mb-2">
                   STAND PARAMETER WHEEL (6-AXIS)
@@ -306,7 +324,6 @@ export default function StandDatabase({ selectedPart, setSelectedPart }) {
                 />
               </div>
 
-              {/* Bio & Details */}
               <div className="space-y-4">
                 <div>
                   <h4 className="font-manga text-sm text-yellow-400 tracking-wider">STAND ABILITY:</h4>
@@ -323,30 +340,25 @@ export default function StandDatabase({ selectedPart, setSelectedPart }) {
                 </div>
 
                 <div>
-                  <h4 className="font-manga text-sm text-purple-300 tracking-wider">MUSICAL & TAROT ORIGIN:</h4>
+                  <h4 className="font-manga text-sm text-purple-300 tracking-wider">MUSICAL ORIGIN:</h4>
                   <p className="text-gray-300 text-xs mt-1">
                     🎵 {activeStandModal.musicalReference}
                   </p>
-                  {activeStandModal.tarot !== 'None' && (
-                    <p className="text-gray-300 text-xs">
-                      🃏 Tarot Card: {activeStandModal.tarot}
-                    </p>
-                  )}
                 </div>
 
                 <div className="bg-black/60 p-3 border-2 border-black">
-                  <div className="text-[10px] font-manga text-yellow-400 uppercase">ICONIC QUOTE</div>
+                  <div className="text-[10px] font-manga text-yellow-400 uppercase">STAND CRY & QUOTE</div>
                   <div className="font-manga text-lg text-white">
-                    "{activeQuoteForModal(activeStandModal)}"
+                    "{activeStandModal.quote || activeStandModal.standCry}"
                   </div>
                 </div>
 
                 <button
-                  onClick={() => handlePlayCry(activeStandModal)}
+                  onClick={() => handlePlayRealVoice(activeStandModal)}
                   className="w-full comic-btn bg-yellow-400 hover:bg-yellow-300 text-black py-2.5 text-sm flex items-center justify-center gap-2 font-bold shadow-[4px_4px_0px_#000]"
                 >
                   <Volume2 className="w-4 h-4" />
-                  <span>PLAY STAND CRY & QUOTE</span>
+                  <span>PLAY REAL CHARACTER VOICE CLIP</span>
                 </button>
               </div>
             </div>
@@ -355,8 +367,4 @@ export default function StandDatabase({ selectedPart, setSelectedPart }) {
       )}
     </div>
   );
-}
-
-function activeQuoteForModal(stand) {
-  return stand.quote || stand.standCry;
 }

@@ -16,8 +16,25 @@ export default function HeroBanner({ setActiveTab, onSelectPart }) {
   const activeQuote = FAMOUS_QUOTES[quoteIndex];
 
   const handlePlayQuoteAudio = (quote) => {
-    soundEngine.playStandSummon();
-    soundEngine.speak(quote.quote, 1.0, 0.9);
+    const text = quote.quote.toLowerCase();
+    if (text.includes('yare yare')) {
+      soundEngine.playYareYareDaze();
+    } else if (text.includes('wryyy')) {
+      soundEngine.playDioWryyy();
+    } else if (text.includes('dio da')) {
+      soundEngine.playDioApproach();
+    } else if (text.includes('nigerundayo')) {
+      soundEngine.playNigerundayo();
+    } else if (text.includes('giorno')) {
+      soundEngine.playGiornoDream();
+    } else if (text.includes('arrivederci')) {
+      soundEngine.playArrivederci();
+    } else if (text.includes('lesson 5') || text.includes('gyro')) {
+      soundEngine.playTuskOra();
+    } else {
+      soundEngine.playStandSummon();
+      soundEngine.speak(quote.quote, 1.0, 0.9);
+    }
   };
 
   return (
@@ -32,7 +49,7 @@ export default function HeroBanner({ setActiveTab, onSelectPart }) {
         <div className="lg:col-span-7 space-y-5">
           <div className="inline-flex items-center gap-2 bg-yellow-400 text-black px-3 py-1 font-manga text-sm border-2 border-black shadow-[3px_3px_0px_#000]">
             <Sparkles className="w-4 h-4" />
-            <span>THE ULTIMATE ARAKI MANGA EXPERIENCE</span>
+            <span>ORIGINAL JAPANESE ANIME VOICE ARCHIVE INTEGRATED</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-manga tracking-wide leading-none text-white">
@@ -46,8 +63,7 @@ export default function HeroBanner({ setActiveTab, onSelectPart }) {
 
           <p className="text-gray-300 text-sm md:text-base max-w-xl font-medium leading-relaxed">
             Welcome to the definitive interactive archive of Hirohiko Araki’s legendary masterpiece. 
-            Explore canon Stand radar charts, create your custom Stand, hear iconic battle cries, trace the 
-            multiverse Joestar bloodline, and simulate epic Stand rushes!
+            Now featuring <strong className="text-yellow-400">authentic anime voice lines</strong> from Daisuke Ono, Takehito Koyasu, Kensho Ono, Fairouz Ai, and Tomokazu Sugita!
           </p>
 
           {/* Quick CTA Buttons */}
@@ -82,7 +98,7 @@ export default function HeroBanner({ setActiveTab, onSelectPart }) {
               className="comic-btn bg-purple-700 hover:bg-purple-600 text-white px-4 py-2.5 text-base flex items-center gap-2 shadow-[4px_4px_0px_#000]"
             >
               <Volume2 className="w-5 h-5 text-yellow-300" />
-              <span>SOUNDBOARD</span>
+              <span>REAL VOICE SOUNDBOARD</span>
             </button>
           </div>
         </div>
@@ -109,10 +125,10 @@ export default function HeroBanner({ setActiveTab, onSelectPart }) {
             <div className="mt-4 pt-3 border-t-2 border-purple-800/80 flex items-center justify-between">
               <button
                 onClick={() => handlePlayQuoteAudio(activeQuote)}
-                className="comic-btn bg-yellow-400 hover:bg-yellow-300 text-black px-3 py-1 text-xs font-bold flex items-center gap-1.5 shadow-[2px_2px_0px_#000]"
+                className="comic-btn bg-yellow-400 hover:bg-yellow-300 text-black px-3 py-1.5 text-xs font-bold flex items-center gap-1.5 shadow-[2px_2px_0px_#000]"
               >
                 <Play className="w-3.5 h-3.5 fill-current" />
-                <span>SPEAK QUOTE</span>
+                <span>PLAY REAL ANIME VOICE</span>
               </button>
 
               <button

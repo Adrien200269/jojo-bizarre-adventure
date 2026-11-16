@@ -112,13 +112,27 @@ export default function Footer({ setActiveTab }) {
           </div>
         </div>
 
+        {/* Author Signature & Attribution */}
+        <div className="pt-6 border-t-2 border-purple-900/60 flex flex-col items-center justify-center text-center space-y-2">
+          <div className="inline-flex items-center gap-2 bg-[#190d33] border-3 border-yellow-400 px-5 py-2 shadow-[4px_4px_0px_#ff0077] transition-transform hover:scale-105">
+            <Heart className="w-4 h-4 text-pink-500 fill-current animate-pulse" />
+            <span className="font-manga text-base sm:text-lg text-yellow-400 tracking-wider">
+              MADE BY SABJA SHRESTHA
+            </span>
+            <span className="text-yellow-400 font-manga text-base">★</span>
+          </div>
+          <p className="text-xs text-gray-400">
+            Dedicated to JoJo's Bizarre Adventure & Hirohiko Araki’s creative universe.
+          </p>
+        </div>
+
         {/* Bottom Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-2 font-medium">
+        <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-2 font-medium pt-2">
           <div>
             JoJo's Bizarre Adventure © Hirohiko Araki / Lucky Land Communications / Shueisha.
           </div>
           <div className="flex items-center gap-1 font-manga text-yellow-400">
-            <span>BUILT WITH REACT & TAILWIND CSS</span>
+            <span>MADE BY SABJA SHRESTHA</span>
             <span className="text-pink-500">★</span>
             <span className="font-kanji">ゴゴゴゴ</span>
           </div>

@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
+/* Custom JoJo Fonts */
+.font-manga {
+  font-family: 'Bangers', cursive, sans-serif;
+  letter-spacing: 0.05em;
+}
+
+.font-kanji {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.font-gothic {
+  font-family: 'Cinzel', serif;
+}
+
+/* Araki Halftone Comic Dot Pattern */
+.manga-dots {
+  background-image: radial-gradient(rgba(255, 0, 119, 0.15) 1.5px, transparent 0);
+  background-size: 16px 16px;
+}
+
+.manga-dots-yellow {
+  background-image: radial-gradient(rgba(255, 215, 0, 0.18) 1.5px, transparent 0);
+  background-size: 14px 14px;
+}
+
+/* Comic Border & Shadow utility */
+.comic-box {
+  border: 3px solid #000;
+  box-shadow: 6px 6px 0px #000;
+  transition: all 0.15s ease;
+}
+
+.comic-box:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0px #000;
+}
+
+.comic-box-purple {
+  border: 3px solid #000;
+  box-shadow: 6px 6px 0px #a855f7;
+}
+
+.comic-btn {
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0px #000;
+  font-family: 'Bangers', cursive;
+  letter-spacing: 0.05em;
+  transition: all 0.1s ease;
+}
+
+.comic-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0px #000;
+}
+
+.comic-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #000;
+}
+
+/* "The World" / Time Stop Filter Animation */
+.time-stop-active {
+  animation: zaWarudoPulse 1.8s ease-in-out forwards;
+}
+
+@keyframes zaWarudoPulse {
+  0% {
+    filter: invert(0%) hue-rotate(0deg) contrast(100%);
+  }
+  30% {
+    filter: invert(100%) hue-rotate(180deg) contrast(200%) saturate(300%);
+  }
+  70% {
+    filter: invert(90%) hue-rotate(240deg) contrast(180%);
+  }
+  100% {
+    filter: invert(0%) hue-rotate(0deg) contrast(100%);
+  }
+}
+
+/* Araki Color Shift Modes */
+.color-shift-morioh {
+  filter: hue-rotate(85deg) saturate(135%);
+}
+
+.color-shift-golden {
+  filter: sepia(35%) hue-rotate(340deg) saturate(150%);
+}
+
+.color-shift-dio {
+  filter: invert(15%) hue-rotate(190deg) contrast(120%);
+}
+
+/* Menacing SFX floating animation */
+@keyframes floatUpFade {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.6) rotate(-5deg);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-20px) scale(1.1) rotate(5deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px) scale(1.3) rotate(-10deg);
+  }
+}
+
+.animate-sfx-float {
+  animation: floatUpFade 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Speed Lines Background */
+.speed-lines {
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(255, 255, 255, 0.03) 0deg 2deg,
+    transparent 2deg 6deg
+  );
+}
+
+/* Custom glowing text */
+.text-stroke-black {
+  -webkit-text-stroke: 1.5px black;
+}
+
+.text-stroke-thick {
+  -webkit-text-stroke: 3px black;
+}

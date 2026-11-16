@@ -247,6 +247,22 @@ const REAL_VOICE_TRIGGERS = [
   }
 ];
 
+const getCharacterImage = (char) => {
+  if (char.includes('DIO')) return '/images/dio.png';
+  if (char.includes('Jotaro')) return '/images/jotaro.png';
+  if (char.includes('Giorno')) return '/images/giorno.png';
+  if (char.includes('Joseph')) return '/images/joseph.png';
+  if (char.includes('Josuke')) return '/images/josuke.png';
+  if (char.includes('Kira')) return '/images/kira.png';
+  if (char.includes('Bucciarati')) return '/images/bucciarati.png';
+  if (char.includes('Diavolo')) return '/images/diavolo.png';
+  if (char.includes('Jolyne')) return '/images/jolyne.png';
+  if (char.includes('Johnny')) return '/images/johnny.png';
+  if (char.includes('Tusk')) return '/images/tusk.png';
+  if (char.includes('Narancia')) return '/images/bucciarati.png';
+  return null;
+};
+
 export default function Soundboard() {
   const [activeSoundId, setActiveSoundId] = useState(null);
   const [filterType, setFilterType] = useState('ALL');
@@ -332,10 +348,20 @@ export default function Soundboard() {
             >
               {/* Top Tag & Real Voice Badge */}
               <div className="flex items-center justify-between mb-2">
-                <span className="font-mono text-[9px] font-bold uppercase tracking-wider bg-black/60 text-yellow-300 px-2 py-0.5 border border-black/40">
-                  {item.character}
-                </span>
-                <span className="text-2xl">{item.icon}</span>
+                <div className="flex items-center gap-1.5 min-w-0">
+                  {getCharacterImage(item.character) && (
+                    <img
+                      src={getCharacterImage(item.character)}
+                      alt={item.character}
+                      className="w-6 h-6 rounded-full object-cover border border-black/60 shadow-xs shrink-0 bg-black/40"
+                      loading="lazy"
+                    />
+                  )}
+                  <span className="font-mono text-[9px] font-bold uppercase tracking-wider bg-black/60 text-yellow-300 px-2 py-0.5 border border-black/40 truncate">
+                    {item.character}
+                  </span>
+                </div>
+                <span className="text-2xl shrink-0">{item.icon}</span>
               </div>
 
               {/* Title & Kanji */}

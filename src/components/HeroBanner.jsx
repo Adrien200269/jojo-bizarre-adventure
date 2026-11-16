@@ -113,12 +113,21 @@ export default function HeroBanner({ setActiveTab, onSelectPart }) {
               <span className="font-kanji text-purple-400 text-sm font-bold">名言</span>
             </div>
 
-            <div className="min-h-[110px] flex flex-col justify-center">
-              <blockquote className="font-manga text-2xl md:text-3xl text-white tracking-wide text-stroke-black">
-                "{activeQuote.quote}"
-              </blockquote>
-              <div className="mt-2 text-pink-400 font-semibold text-xs tracking-wider uppercase">
-                — {activeQuote.character} ({activeQuote.meaning})
+            <div className="min-h-[110px] flex items-center gap-4">
+              {activeQuote.image && (
+                <img
+                  src={activeQuote.image}
+                  alt={activeQuote.character}
+                  className="w-18 h-18 rounded-full border-3 border-yellow-400 object-cover bg-black/60 shadow-lg shrink-0"
+                />
+              )}
+              <div className="min-w-0">
+                <blockquote className="font-manga text-xl md:text-2xl text-white tracking-wide text-stroke-black">
+                  "{activeQuote.quote}"
+                </blockquote>
+                <div className="mt-2 text-pink-400 font-semibold text-xs tracking-wider uppercase">
+                  — {activeQuote.character} ({activeQuote.meaning})
+                </div>
               </div>
             </div>
 

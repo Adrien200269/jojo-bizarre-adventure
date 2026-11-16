@@ -29,6 +29,17 @@ const AURA_COLORS = [
   { name: "Crimson Red", hex: "#ef4444" },
 ];
 
+const STAND_AVATAR_PRESETS = [
+  { id: 'star_platinum', name: 'Star Platinum', image: '/images/star_platinum.png' },
+  { id: 'the_world', name: 'The World', image: '/images/the_world.png' },
+  { id: 'crazy_diamond', name: 'Crazy Diamond', image: '/images/crazy_diamond.png' },
+  { id: 'gold_experience', name: 'Gold Experience', image: '/images/gold_experience.png' },
+  { id: 'killer_queen', name: 'Killer Queen', image: '/images/killer_queen.png' },
+  { id: 'stone_free', name: 'Stone Free', image: '/images/stone_free.png' },
+  { id: 'tusk', name: 'Tusk Act 4', image: '/images/tusk.png' },
+  { id: 'd4c', name: 'D4C', image: '/images/d4c.png' },
+];
+
 export default function StandCreator({ customStand, setCustomStand, setActiveTab }) {
   const [standName, setStandName] = useState(customStand?.name || "Velvet Underground");
   const [masterName, setMasterName] = useState(customStand?.user || "You (Stand Master)");
@@ -38,6 +49,7 @@ export default function StandCreator({ customStand, setCustomStand, setActiveTab
     customStand?.description || "Can manipulate gravitational frequencies within a 5-meter radius, turning kinetic impacts into vibrating sound waves."
   );
   const [auraColor, setAuraColor] = useState(customStand?.themeColor || "#ec4899");
+  const [selectedAvatar, setSelectedAvatar] = useState(customStand?.standImage || STAND_AVATAR_PRESETS[0].image);
   const [copied, setCopied] = useState(false);
 
   // Stats from 20 to 100
@@ -109,7 +121,9 @@ export default function StandCreator({ customStand, setCustomStand, setActiveTab
       statValues: stats,
       themeColor: auraColor,
       accentColor: "#ffffff",
-      alignment: "Joestar"
+      alignment: "Joestar",
+      image: selectedAvatar,
+      standImage: selectedAvatar
     };
 
     setCustomStand(standData);
@@ -247,6 +261,35 @@ export default function StandCreator({ customStand, setCustomStand, setActiveTab
             />
           </div>
 
+          {/* Stand Visual Model Preset */}
+          <div>
+            <label className="block font-manga text-xs text-yellow-400 mb-2">
+              STAND VISUAL MODEL & AVATAR
+            </label>
+            <div className="grid grid-cols-4 sm:grid-cols-8 gap-2">
+              {STAND_AVATAR_PRESETS.map((av) => (
+                <button
+                  key={av.id}
+                  onClick={() => {
+                    setSelectedAvatar(av.image);
+                    soundEngine.playStandSummon();
+                  }}
+                  className={`p-1 border-2 transition-transform bg-[#0a0414] flex flex-col items-center ${
+                    selectedAvatar === av.image
+                      ? 'border-yellow-400 scale-105 shadow-[0_0_8px_#ffd700]'
+                      : 'border-black hover:border-gray-500'
+                  }`}
+                  title={av.name}
+                >
+                  <img src={av.image} alt={av.name} className="w-full h-11 object-contain" />
+                  <span className="text-[8px] text-gray-300 font-manga truncate w-full text-center mt-0.5">
+                    {av.name.split(' ')[0]}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Aura Color Choice */}
           <div>
             <label className="block font-manga text-xs text-yellow-400 mb-2">
@@ -319,9 +362,20 @@ export default function StandCreator({ customStand, setCustomStand, setActiveTab
             <h3 className="font-manga text-3xl md:text-4xl text-white text-stroke-black drop-shadow-[2px_2px_0px_#000]">
               {standName || "UNNAMED STAND"}
             </h3>
-            <div className="text-pink-400 font-bold text-xs mb-4">
+            <div className="text-pink-400 font-bold text-xs mb-3">
               Master: {masterName || "Unknown Master"}
             </div>
+
+            {/* Stand Model Visual Preview */}
+            {selectedAvatar && (
+              <div className="relative h-40 bg-[#0a0414] border-2 border-black my-2 overflow-hidden flex items-center justify-center">
+                <img
+                  src={selectedAvatar}
+                  alt={standName}
+                  className="max-h-full max-w-full object-contain filter drop-shadow-[0_0_12px_rgba(255,215,0,0.5)]"
+                />
+              </div>
+            )}
 
             {/* Radar Chart Display */}
             <div className="bg-[#0b0518] p-4 border-4 border-black my-4 flex justify-center">

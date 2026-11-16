@@ -216,7 +216,7 @@ export default function BattleSimulator({ customStand }) {
               value={fighter1Id}
               disabled={isBattling}
               onChange={(e) => setFighter1Id(e.target.value)}
-              className="w-full bg-[#0b0517] border-2 border-black text-white px-3 py-2 text-sm font-semibold focus:outline-none focus:border-yellow-400 mb-4"
+              className="w-full bg-[#0b0517] border-2 border-black text-white px-3 py-2 text-sm font-semibold focus:outline-none focus:border-yellow-400 mb-3"
             >
               {availableFighters.map((f) => (
                 <option key={f.id} value={f.id}>
@@ -224,6 +224,29 @@ export default function BattleSimulator({ customStand }) {
                 </option>
               ))}
             </select>
+
+            {/* Fighter 1 Portrait Showcase */}
+            <div className="relative h-48 bg-[#0a0414] border-2 border-black mb-3 overflow-hidden flex items-center justify-center">
+              {f1.standImage || f1.image ? (
+                <img
+                  src={f1.standImage || f1.image}
+                  alt={f1.name}
+                  className={`max-h-full max-w-full object-contain filter drop-shadow-[0_0_12px_rgba(255,215,0,0.5)] transition-all duration-300 ${
+                    isBattling ? 'scale-105 animate-pulse' : ''
+                  }`}
+                />
+              ) : (
+                <div className="font-manga text-yellow-400 text-sm">FIGHTER 1</div>
+              )}
+              {f1.image && (
+                <div className="absolute bottom-2 left-2 flex items-center gap-1.5 bg-black/85 border border-yellow-400 px-2 py-0.5 shadow-md">
+                  <img src={f1.image} alt={f1.user} className="w-6 h-6 rounded-full object-cover border border-white" />
+                  <span className="text-[10px] font-manga text-yellow-300 truncate max-w-[90px]">
+                    {f1.user.split(' ')[0]}
+                  </span>
+                </div>
+              )}
+            </div>
 
             <h3 className="font-manga text-3xl text-white drop-shadow-[2px_2px_0px_#000]">
               {f1.name}
@@ -303,7 +326,7 @@ export default function BattleSimulator({ customStand }) {
               value={fighter2Id}
               disabled={isBattling}
               onChange={(e) => setFighter2Id(e.target.value)}
-              className="w-full bg-[#0b0517] border-2 border-black text-white px-3 py-2 text-sm font-semibold focus:outline-none focus:border-cyan-400 mb-4"
+              className="w-full bg-[#0b0517] border-2 border-black text-white px-3 py-2 text-sm font-semibold focus:outline-none focus:border-cyan-400 mb-3"
             >
               {availableFighters.map((f) => (
                 <option key={f.id} value={f.id}>
@@ -311,6 +334,29 @@ export default function BattleSimulator({ customStand }) {
                 </option>
               ))}
             </select>
+
+            {/* Fighter 2 Portrait Showcase */}
+            <div className="relative h-48 bg-[#0a0414] border-2 border-black mb-3 overflow-hidden flex items-center justify-center">
+              {f2.standImage || f2.image ? (
+                <img
+                  src={f2.standImage || f2.image}
+                  alt={f2.name}
+                  className={`max-h-full max-w-full object-contain filter drop-shadow-[0_0_12px_rgba(6,182,212,0.5)] transition-all duration-300 ${
+                    isBattling ? 'scale-105 animate-pulse' : ''
+                  }`}
+                />
+              ) : (
+                <div className="font-manga text-cyan-400 text-sm">FIGHTER 2</div>
+              )}
+              {f2.image && (
+                <div className="absolute bottom-2 right-2 flex items-center gap-1.5 bg-black/85 border border-cyan-400 px-2 py-0.5 shadow-md">
+                  <span className="text-[10px] font-manga text-cyan-300 truncate max-w-[90px]">
+                    {f2.user.split(' ')[0]}
+                  </span>
+                  <img src={f2.image} alt={f2.user} className="w-6 h-6 rounded-full object-cover border border-white" />
+                </div>
+              )}
+            </div>
 
             <h3 className="font-manga text-3xl text-white drop-shadow-[2px_2px_0px_#000]">
               {f2.name}
@@ -373,10 +419,28 @@ export default function BattleSimulator({ customStand }) {
             ))}
 
             {winner && (
-              <div className="bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-600 text-black border-4 border-black p-6 shadow-[6px_6px_0px_#ff0077] text-center space-y-2 mt-6">
+              <div className="bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-600 text-black border-4 border-black p-6 shadow-[6px_6px_0px_#ff0077] text-center space-y-3 mt-6">
                 <div className="font-manga text-sm font-bold tracking-widest uppercase">
                   🏆 MATCH DECISION & VICTORY 🏆
                 </div>
+
+                {(winner.standImage || winner.image) && (
+                  <div className="flex justify-center items-center gap-4 py-2">
+                    <img
+                      src={winner.standImage || winner.image}
+                      alt={winner.name}
+                      className="h-32 object-contain drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)] animate-bounce"
+                    />
+                    {winner.image && winner.standImage && (
+                      <img
+                        src={winner.image}
+                        alt={winner.user}
+                        className="w-16 h-16 rounded-full border-3 border-black object-cover shadow-lg"
+                      />
+                    )}
+                  </div>
+                )}
+
                 <div className="font-manga text-4xl md:text-5xl tracking-wide">
                   WINNER: [{winner.name}]!
                 </div>

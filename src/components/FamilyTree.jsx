@@ -122,11 +122,28 @@ export default function FamilyTree() {
                     <span className="text-yellow-400 font-manga text-xs">★</span>
                   </div>
 
-                  <h3 className="font-manga text-xl text-white group-hover:text-yellow-400 transition-colors">
-                    {member.name}
-                  </h3>
-                  <div className="font-kanji text-xs text-purple-300 font-bold mb-1">
-                    {member.japanese}
+                  {/* Character Avatar & Name */}
+                  <div className="flex items-center gap-3 mb-2">
+                    {member.image ? (
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="w-12 h-12 rounded-full border-2 border-yellow-400 object-cover bg-black/60 shadow-md shrink-0"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-12 h-12 rounded-full border-2 border-purple-700 bg-purple-950/60 flex items-center justify-center text-yellow-300 font-manga text-lg shrink-0">
+                        ★
+                      </div>
+                    )}
+                    <div className="min-w-0">
+                      <h3 className="font-manga text-lg text-white group-hover:text-yellow-400 transition-colors leading-tight truncate">
+                        {member.name}
+                      </h3>
+                      <div className="font-kanji text-[11px] text-purple-300 font-bold truncate">
+                        {member.japanese}
+                      </div>
+                    </div>
                   </div>
 
                   <div className="text-xs text-pink-400 font-medium mb-2">
@@ -168,11 +185,23 @@ export default function FamilyTree() {
               <span className="text-xs text-gray-400">{selectedMember.part}</span>
             </div>
 
-            <h3 className="font-manga text-3xl text-yellow-400 text-stroke-black">
-              {selectedMember.name}
-            </h3>
-            <div className="font-kanji text-purple-300 font-bold mb-3">
-              {selectedMember.japanese}
+            {/* Member Modal Header with Portrait */}
+            <div className="flex items-center gap-4 mb-3">
+              {selectedMember.image && (
+                <img
+                  src={selectedMember.image}
+                  alt={selectedMember.name}
+                  className="w-20 h-20 rounded-full border-3 border-yellow-400 object-cover bg-black/60 shadow-lg shrink-0"
+                />
+              )}
+              <div>
+                <h3 className="font-manga text-3xl text-yellow-400 text-stroke-black">
+                  {selectedMember.name}
+                </h3>
+                <div className="font-kanji text-purple-300 font-bold">
+                  {selectedMember.japanese}
+                </div>
+              </div>
             </div>
 
             <div className="space-y-3 border-t-2 border-purple-900/80 pt-3">

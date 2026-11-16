@@ -11,7 +11,8 @@ export const FAMILY_TREE_DATA = {
       spouse: "Mary Joestar",
       children: ["jonathan"],
       description: "Aristocratic British nobleman and father of Jonathan. Unknowingly took in Dario Brando's son, Dio, starting the centuries-long feud.",
-      badge: "Patriarch"
+      badge: "Patriarch",
+      image: null
     },
     {
       id: "jonathan",
@@ -23,7 +24,8 @@ export const FAMILY_TREE_DATA = {
       spouse: "Erina Pendleton",
       children: ["george-2", "giorno"],
       description: "True gentleman and Hamon master who fought his adoptive vampire brother Dio to the death in the Atlantic ocean.",
-      badge: "JoJo #1"
+      badge: "JoJo #1",
+      image: "/images/jonathan.png"
     },
     {
       id: "george-2",
@@ -35,7 +37,8 @@ export const FAMILY_TREE_DATA = {
       spouse: "Elizabeth (Lisa Lisa)",
       children: ["joseph"],
       description: "A brave Royal Air Force pilot who lacked Hamon training; killed by a disguised zombie general under Dio's remnants.",
-      badge: "Generation 3"
+      badge: "Generation 3",
+      image: null
     },
     {
       id: "lisa-lisa",
@@ -47,7 +50,8 @@ export const FAMILY_TREE_DATA = {
       spouse: "George Joestar II",
       children: ["joseph"],
       description: "Supreme Hamon mentor to Joseph and Caesar Zeppeli, guardian of the Red Stone of Aja, and Joseph's long-lost mother.",
-      badge: "Hamon Master"
+      badge: "Hamon Master",
+      image: "/images/lisa_lisa.png"
     },
     {
       id: "joseph",
@@ -60,7 +64,8 @@ export const FAMILY_TREE_DATA = {
       children: ["holly", "josuke-4"],
       description: "The cunning tactician who defeated the ancient Pillar Men with clackers, Hamon, and the secret Joestar retreat technique.",
       stand: "Hermit Purple",
-      badge: "JoJo #2"
+      badge: "JoJo #2",
+      image: "/images/joseph.png"
     },
     {
       id: "giorno",
@@ -73,7 +78,8 @@ export const FAMILY_TREE_DATA = {
       children: [],
       description: "Conceived by DIO using Jonathan's stolen body. Inherited Joestar righteousness and Brando resolve. Master of Gold Experience Requiem.",
       stand: "Gold Experience / GER",
-      badge: "JoJo #5 / Mafia Boss"
+      badge: "JoJo #5 / Mafia Boss",
+      image: "/images/giorno.png"
     },
     {
       id: "holly",
@@ -85,7 +91,8 @@ export const FAMILY_TREE_DATA = {
       spouse: "Sadao Kujo",
       children: ["jotaro"],
       description: "Gentle mother whose peaceful spirit could not control her awakened Stand, prompting Jotaro and Joseph's trek to Cairo.",
-      badge: "Generation 5"
+      badge: "Generation 5",
+      image: null
     },
     {
       id: "josuke-4",
@@ -98,7 +105,8 @@ export const FAMILY_TREE_DATA = {
       children: [],
       description: "Joseph's illegitimate son born in Morioh. Gentle-hearted high schooler with an explosive temper when anyone insults his pompadour.",
       stand: "Crazy Diamond",
-      badge: "JoJo #4"
+      badge: "JoJo #4",
+      image: "/images/josuke.png"
     },
     {
       id: "jotaro",
@@ -110,7 +118,8 @@ export const FAMILY_TREE_DATA = {
       children: ["jolyne"],
       description: "Stoic, unflinching crusader who ended DIO's reign in 1989. Master of Star Platinum's time-stopping fist.",
       stand: "Star Platinum",
-      badge: "JoJo #3"
+      badge: "JoJo #3",
+      image: "/images/jotaro.png"
     },
     {
       id: "jolyne",
@@ -123,7 +132,8 @@ export const FAMILY_TREE_DATA = {
       children: [],
       description: "First female JoJo. Framed and imprisoned in Green Dolphin Street Prison, where she awakens Stone Free and fights to save her father's memory.",
       stand: "Stone Free",
-      badge: "JoJo #6"
+      badge: "JoJo #6",
+      image: "/images/jolyne.png"
     }
   ],
   sbr: [
@@ -138,7 +148,8 @@ export const FAMILY_TREE_DATA = {
       children: ["george-sbr-3"],
       description: "Paraplegic former jockey who enters the trans-American race alongside Gyro Zeppeli, mastering the Golden Spin and Tusk Act 4.",
       stand: "Tusk (ACT 1-4)",
-      badge: "JoJo #7"
+      badge: "JoJo #7",
+      image: "/images/johnny.png"
     },
     {
       id: "fumi-joseph",
@@ -150,7 +161,8 @@ export const FAMILY_TREE_DATA = {
       spouse: "Suzi Q (SBR)",
       children: ["holy-kira", "barbara-ann"],
       description: "Alternate Joseph Joestar who grew up in Morioh in 1941, wielding a thorned vine Stand.",
-      badge: "SBR Generation 3"
+      badge: "SBR Generation 3",
+      image: "/images/joseph.png"
     },
     {
       id: "holy-kira",
@@ -161,7 +173,8 @@ export const FAMILY_TREE_DATA = {
       generation: 4,
       children: ["kira-8"],
       description: "TG University Hospital doctor suffering from a brain-petrification illness, prompting the quest for the Locacaca fruit.",
-      badge: "SBR Generation 4"
+      badge: "SBR Generation 4",
+      image: null
     },
     {
       id: "barbara-ann",
@@ -172,7 +185,8 @@ export const FAMILY_TREE_DATA = {
       generation: 4,
       children: ["dragona", "jodio"],
       description: "Daughter of Joseph Joestar who moved to Oahu, Hawaii. Mother to Dragona and Jodio.",
-      badge: "SBR Generation 4"
+      badge: "SBR Generation 4",
+      image: null
     },
     {
       id: "gappy",
@@ -183,7 +197,8 @@ export const FAMILY_TREE_DATA = {
       generation: 5,
       description: "Emerged from the Wall Eyes of Morioh as an amnesiac fusion of Josefumi Kujo and Yoshikage Kira via the Locacaca fruit exchange.",
       stand: "Soft & Wet / Go Beyond",
-      badge: "JoJo #8"
+      badge: "JoJo #8",
+      image: "/images/gappy.png"
     },
     {
       id: "dragona",
@@ -194,7 +209,8 @@ export const FAMILY_TREE_DATA = {
       generation: 5,
       stand: "Smooth Operators",
       description: "Stylish, calm older sibling who works with Jodio in Hawaii. Stand can slide and displace physical injuries and objects.",
-      badge: "Ally & Sibling"
+      badge: "Ally & Sibling",
+      image: null
     },
     {
       id: "jodio",
@@ -205,7 +221,8 @@ export const FAMILY_TREE_DATA = {
       generation: 5,
       stand: "November Rain",
       description: "15-year-old high school student in Hawaii obsessed with 'mechanisms' of social power and wealth.",
-      badge: "JoJo #9"
+      badge: "JoJo #9",
+      image: "/images/jodio.png"
     }
   ]
 };

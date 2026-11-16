@@ -166,6 +166,31 @@ export default function StandQuiz() {
             </span>
           </div>
 
+          {/* Stand & Master Art Reveal Banner */}
+          {(resultStand.standImage || resultStand.image) && (
+            <div className="bg-[#0b0518] border-4 border-black p-4 max-w-lg mx-auto mb-6 flex items-center justify-center gap-6 relative">
+              {resultStand.standImage && (
+                <img
+                  src={resultStand.standImage}
+                  alt={resultStand.name}
+                  className="h-44 max-w-[240px] object-contain filter drop-shadow-[0_0_15px_rgba(255,215,0,0.5)]"
+                />
+              )}
+              {resultStand.image && (
+                <div className="flex flex-col items-center shrink-0">
+                  <img
+                    src={resultStand.image}
+                    alt={resultStand.user}
+                    className="w-24 h-24 rounded-full border-3 border-yellow-400 object-cover shadow-lg bg-black/60"
+                  />
+                  <span className="text-xs font-manga text-yellow-300 mt-1">
+                    {resultStand.user.split(' ')[0]}
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Radar Chart */}
           <div className="bg-[#0b0518] border-4 border-black p-4 max-w-sm mx-auto mb-6 flex justify-center">
             <StandRadarChart

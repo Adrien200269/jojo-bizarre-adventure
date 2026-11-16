@@ -36,7 +36,9 @@ export const STANDS_AND_CHARACTERS = [
     statValues: { power: 95, speed: 96, range: 40, durability: 92, precision: 98, potential: 90 },
     themeColor: "#8b5cf6",
     accentColor: "#facc15",
-    alignment: "Joestar"
+    alignment: "Joestar",
+    image: "/images/jotaro.png",
+    standImage: "/images/star_platinum.png"
   },
   {
     id: "the-world",
@@ -62,7 +64,9 @@ export const STANDS_AND_CHARACTERS = [
     statValues: { power: 96, speed: 95, range: 45, durability: 90, precision: 80, potential: 82 },
     themeColor: "#eab308",
     accentColor: "#10b981",
-    alignment: "Villain"
+    alignment: "Villain",
+    image: "/images/dio.png",
+    standImage: "/images/the_world.png"
   },
   {
     id: "crazy-diamond",
@@ -88,7 +92,9 @@ export const STANDS_AND_CHARACTERS = [
     statValues: { power: 92, speed: 92, range: 30, durability: 80, precision: 82, potential: 65 },
     themeColor: "#ec4899",
     accentColor: "#06b6d4",
-    alignment: "Joestar"
+    alignment: "Joestar",
+    image: "/images/josuke.png",
+    standImage: "/images/crazy_diamond.png"
   },
   {
     id: "killer-queen",
@@ -114,7 +120,9 @@ export const STANDS_AND_CHARACTERS = [
     statValues: { power: 90, speed: 78, range: 35, durability: 82, precision: 80, potential: 92 },
     themeColor: "#f43f5e",
     accentColor: "#a855f7",
-    alignment: "Villain"
+    alignment: "Villain",
+    image: "/images/kira.png",
+    standImage: "/images/killer_queen.png"
   },
   {
     id: "gold-experience",
@@ -140,7 +148,9 @@ export const STANDS_AND_CHARACTERS = [
     statValues: { power: 100, speed: 100, range: 100, durability: 100, precision: 100, potential: 100 },
     themeColor: "#f59e0b",
     accentColor: "#ef4444",
-    alignment: "Joestar"
+    alignment: "Joestar",
+    image: "/images/giorno.png",
+    standImage: "/images/gold_experience.png"
   },
   {
     id: "sticky-fingers",
@@ -166,7 +176,9 @@ export const STANDS_AND_CHARACTERS = [
     statValues: { power: 88, speed: 89, range: 45, durability: 55, precision: 68, potential: 50 },
     themeColor: "#0284c7",
     accentColor: "#e0e7ff",
-    alignment: "Ally"
+    alignment: "Ally",
+    image: "/images/bucciarati.png",
+    standImage: "/images/sticky_fingers.png"
   },
   {
     id: "king-crimson",
@@ -192,7 +204,9 @@ export const STANDS_AND_CHARACTERS = [
     statValues: { power: 96, speed: 94, range: 20, durability: 25, precision: 50, potential: 30 },
     themeColor: "#dc2626",
     accentColor: "#f43f5e",
-    alignment: "Villain"
+    alignment: "Villain",
+    image: "/images/diavolo.png",
+    standImage: "/images/king_crimson.png"
   },
   {
     id: "stone-free",
@@ -218,7 +232,9 @@ export const STANDS_AND_CHARACTERS = [
     statValues: { power: 86, speed: 80, range: 50, durability: 80, precision: 70, potential: 90 },
     themeColor: "#06b6d4",
     accentColor: "#10b981",
-    alignment: "Joestar"
+    alignment: "Joestar",
+    image: "/images/jolyne.png",
+    standImage: "/images/stone_free.png"
   },
   {
     id: "made-in-heaven",
@@ -244,7 +260,9 @@ export const STANDS_AND_CHARACTERS = [
     statValues: { power: 75, speed: 100, range: 50, durability: 90, precision: 72, potential: 95 },
     themeColor: "#ffffff",
     accentColor: "#6366f1",
-    alignment: "Villain"
+    alignment: "Villain",
+    image: "/images/pucci.png",
+    standImage: "/images/made_in_heaven.png"
   },
   {
     id: "tusk-act-4",
@@ -270,7 +288,9 @@ export const STANDS_AND_CHARACTERS = [
     statValues: { power: 98, speed: 78, range: 90, durability: 90, precision: 80, potential: 20 },
     themeColor: "#fb7185",
     accentColor: "#38bdf8",
-    alignment: "Joestar"
+    alignment: "Joestar",
+    image: "/images/johnny.png",
+    standImage: "/images/tusk.png"
   },
   {
     id: "d4c",
@@ -296,7 +316,9 @@ export const STANDS_AND_CHARACTERS = [
     statValues: { power: 92, speed: 90, range: 45, durability: 92, precision: 90, potential: 90 },
     themeColor: "#60a5fa",
     accentColor: "#f472b6",
-    alignment: "Villain"
+    alignment: "Villain",
+    image: "/images/valentine.png",
+    standImage: "/images/d4c.png"
   },
   {
     id: "soft-and-wet",
@@ -322,7 +344,9 @@ export const STANDS_AND_CHARACTERS = [
     statValues: { power: 65, speed: 75, range: 40, durability: 78, precision: 68, potential: 95 },
     themeColor: "#38bdf8",
     accentColor: "#e2e8f0",
-    alignment: "Joestar"
+    alignment: "Joestar",
+    image: "/images/gappy.png",
+    standImage: "/images/soft_and_wet.png"
   },
   {
     id: "wonder-of-u",
@@ -348,7 +372,9 @@ export const STANDS_AND_CHARACTERS = [
     statValues: { power: 90, speed: 70, range: 98, durability: 95, precision: 90, potential: 90 },
     themeColor: "#64748b",
     accentColor: "#f59e0b",
-    alignment: "Villain"
+    alignment: "Villain",
+    image: "/images/toru.png",
+    standImage: "/images/wonder_of_u.png"
   },
   {
     id: "november-rain",
@@ -374,13 +400,15 @@ export const STANDS_AND_CHARACTERS = [
     statValues: { power: 90, speed: 55, range: 35, durability: 78, precision: 65, potential: 92 },
     themeColor: "#22c55e",
     accentColor: "#a855f7",
-    alignment: "Joestar"
+    alignment: "Joestar",
+    image: "/images/jodio.png",
+    standImage: "/images/november_rain.png"
   },
   {
     id: "silver-chariot",
     name: "Silver Chariot",
     japanese: "シルバーチャリオッツ",
-    user: "Jean Pierre Polnareff",
+    user: "Jean Pierre Polnareff (J・P・ポルナレフ)",
     part: 3,
     type: "Close-Range Rapier",
     tarot: "The Chariot",
@@ -400,7 +428,9 @@ export const STANDS_AND_CHARACTERS = [
     statValues: { power: 65, speed: 96, range: 40, durability: 75, precision: 88, potential: 60 },
     themeColor: "#94a3b8",
     accentColor: "#ef4444",
-    alignment: "Ally"
+    alignment: "Ally",
+    image: "/images/polnareff.png",
+    standImage: "/images/silver_chariot.png"
   },
   {
     id: "weather-report",
@@ -426,18 +456,132 @@ export const STANDS_AND_CHARACTERS = [
     statValues: { power: 88, speed: 78, range: 85, durability: 92, precision: 40, potential: 95 },
     themeColor: "#38bdf8",
     accentColor: "#f1f5f9",
-    alignment: "Ally"
+    alignment: "Ally",
+    image: "/images/weather_report.png",
+    standImage: "/images/weather_report.png"
+  },
+  {
+    id: "hermit-purple",
+    name: "Hermit Purple",
+    japanese: "ハーミットパープル (隠者の紫)",
+    user: "Joseph Joestar (ジョセフ・ジョースター)",
+    part: 3,
+    type: "Vines / Divination & Hamon Conductor",
+    tarot: "The Hermit",
+    musicalReference: "None (Tarot Card)",
+    standCry: "OH MY GOD! SUNLIGHT YELLOW OVERDRIVE!",
+    quote: "Nigerundayo, Smokey! The secret Joestar family technique!",
+    description: "Manifests as thorny purple vines from Joseph's hands. Can channel Hamon energy, perform spirit photography by smashing cameras, manipulate electrical maps, and swing through cities like grappling hooks.",
+    signatureMove: "Spirit Photography & Hamon Overdrive Conduit",
+    stats: {
+      power: "D",
+      speed: "C",
+      range: "D",
+      durability: "A",
+      precision: "D",
+      potential: "E"
+    },
+    statValues: { power: 45, speed: 60, range: 45, durability: 90, precision: 50, potential: 25 },
+    themeColor: "#9333ea",
+    accentColor: "#fbbf24",
+    alignment: "Joestar",
+    image: "/images/joseph.png",
+    standImage: "/images/hermit_purple.png"
+  },
+  {
+    id: "hierophant-green",
+    name: "Hierophant Green",
+    japanese: "ハイエロファントグリーン (法皇の緑)",
+    user: "Noriaki Kakyoin (花京院 典明)",
+    part: 3,
+    type: "Long-Range / Elastic Net",
+    tarot: "The Hierophant",
+    musicalReference: "None (Tarot Card)",
+    standCry: "EMERALD SPLASH!",
+    quote: "No one can just deflect the Emerald Splash! Take this, DIO! 20-Meter Emerald Splash!",
+    description: "A mechanical web-like Stand that can unravel its body into a microscopic elastic tripwire net across a 20-meter perimeter. Unleashes its signature barrage of destructive emerald energy projectiles.",
+    signatureMove: "20-Meter Radius Emerald Splash",
+    stats: {
+      power: "C",
+      speed: "B",
+      range: "A",
+      durability: "B",
+      precision: "C",
+      potential: "D"
+    },
+    statValues: { power: 65, speed: 78, range: 95, durability: 75, precision: 70, potential: 45 },
+    themeColor: "#10b981",
+    accentColor: "#34d399",
+    alignment: "Ally",
+    image: "/images/kakyoin.png",
+    standImage: "/images/hierophant_green.png"
+  },
+  {
+    id: "heavens-door",
+    name: "Heaven's Door",
+    japanese: "ヘブンズ・ドアー",
+    user: "Rohan Kishibe (岸辺 露伴)",
+    part: 4,
+    type: "Information / Mind Command",
+    tarot: "None",
+    musicalReference: "Knockin' on Heaven's Door - Bob Dylan",
+    standCry: "DAGA KOTOWARU! (I refuse!)",
+    quote: "One of the things I, Rohan Kishibe, love most is saying NO to people who think they're stronger than me!",
+    description: "Turns living beings into books, allowing Rohan to read their memories, secrets, and fears. Crucially, Rohan can write absolute commands into their pages that override physical reality and willpower.",
+    signatureMove: "Reality Rewriting & Safety Lock Command",
+    stats: {
+      power: "D",
+      speed: "B",
+      range: "B",
+      durability: "B",
+      precision: "C",
+      potential: "A"
+    },
+    statValues: { power: 40, speed: 82, range: 75, durability: 75, precision: 72, potential: 95 },
+    themeColor: "#14b8a6",
+    accentColor: "#facc15",
+    alignment: "Ally",
+    image: "/images/rohan.png",
+    standImage: "/images/heavens_door.png"
+  },
+  {
+    id: "the-hand",
+    name: "The Hand",
+    japanese: "ザ・ハンド",
+    user: "Okuyasu Nijimura (虹村 億泰)",
+    part: 4,
+    type: "Close-Range Spatial Erasure",
+    tarot: "None",
+    musicalReference: "The Band (Rock Group)",
+    standCry: "GAAOON!",
+    quote: "I'm not the sharpest guy, but my right hand can erase space itself!",
+    description: "Its right hand can erase any physical matter or space it swipes, seamlessly sewing the fabric of reality back together. By erasing air, Okuyasu can teleport himself or snap enemies directly toward him.",
+    signatureMove: "Spatial Erasure Teleport & Void Swipe",
+    stats: {
+      power: "B",
+      speed: "B",
+      range: "D",
+      durability: "C",
+      precision: "C",
+      potential: "C"
+    },
+    statValues: { power: 85, speed: 78, range: 30, durability: 70, precision: 60, potential: 65 },
+    themeColor: "#3b82f6",
+    accentColor: "#60a5fa",
+    alignment: "Ally",
+    image: "/images/the_hand.png",
+    standImage: "/images/the_hand.png"
   }
 ];
 
 export const FAMOUS_QUOTES = [
-  { quote: "Yare Yare Daze (やれやれだぜ)", character: "Jotaro Kujo", meaning: "Good grief / What a pain" },
-  { quote: "Kono DIO da! (このDIOだ！)", character: "Dio Brando", meaning: "It was me, DIO!" },
-  { quote: "WRYYYYYYYYYY!", character: "DIO", meaning: "Iconic vampire battle cry" },
-  { quote: "Nigerundayo, Smokey! (逃げるんだよォ！)", character: "Joseph Joestar", meaning: "Run away, Smokey! The secret Joestar technique!" },
-  { quote: "Daga Kotowaru! (だが断る！)", character: "Rohan Kishibe", meaning: "I refuse! One of the things I love most is saying NO to someone who thinks they're stronger than me!" },
-  { quote: "Kono Giorno Giovanna ni wa yume ga aru! (このジョルノ・ジョバァーナには夢がある)", character: "Giorno Giovanna", meaning: "I, Giorno Giovanna, have a dream!" },
-  { quote: "Arrivederci! (さよならだ)", character: "Bruno Bucciarati", meaning: "Goodbye! (Italian)" },
-  { quote: "Dojyaaa~~n! (ドジャァ〜〜ン)", character: "Funny Valentine", meaning: "Ta-da! / Here it is!" },
-  { quote: "Lesson 5, Gyro... (レッスン5だ、ジャイロ)", character: "Johnny Joestar", meaning: "The ultimate Golden Spin realization" }
+  { quote: "Yare Yare Daze (やれやれだぜ)", character: "Jotaro Kujo", meaning: "Good grief / What a pain", image: "/images/jotaro.png" },
+  { quote: "Kono DIO da! (このDIOだ！)", character: "Dio Brando", meaning: "It was me, DIO!", image: "/images/dio.png" },
+  { quote: "WRYYYYYYYYYY!", character: "DIO", meaning: "Iconic vampire battle cry", image: "/images/dio.png" },
+  { quote: "Nigerundayo, Smokey! (逃げるんだよォ！)", character: "Joseph Joestar", meaning: "Run away, Smokey! The secret Joestar technique!", image: "/images/joseph.png" },
+  { quote: "Daga Kotowaru! (だが断る！)", character: "Rohan Kishibe", meaning: "I refuse! One of the things I love most is saying NO to someone who thinks they're stronger than me!", image: "/images/rohan.png" },
+  { quote: "Kono Giorno Giovanna ni wa yume ga aru! (このジョルノ・ジョバァーナには夢がある)", character: "Giorno Giovanna", meaning: "I, Giorno Giovanna, have a dream!", image: "/images/giorno.png" },
+  { quote: "Arrivederci! (さよならだ)", character: "Bruno Bucciarati", meaning: "Goodbye! (Italian)", image: "/images/bucciarati.png" },
+  { quote: "Dojyaaa~~n! (ドジャァ〜〜ン)", character: "Funny Valentine", meaning: "Ta-da! / Here it is!", image: "/images/valentine.png" },
+  { quote: "Lesson 5, Gyro... (レッスン5だ、ジャイロ)", character: "Johnny Joestar", meaning: "The ultimate Golden Spin realization", image: "/images/johnny.png" }
 ];
